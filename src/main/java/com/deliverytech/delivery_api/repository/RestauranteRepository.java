@@ -1,10 +1,11 @@
 package com.deliverytech.delivery_api.repository;
-
-import com.deliverytech.delivery_api.model.Restaurante;
+import com.deliverytech.delivery_api.entity.Restaurante;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository // Marca a classe de acesso ao banco [cite: 588]
 public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
-    // Só de estender JpaRepository, você já ganha: findAll, save, delete, findById...
+    // Busca por nome, categoria e ordena por avaliação
+    List<Restaurante> findByNomeContaining(String nome);
+    List<Restaurante> findByCategoria(String categoria);
+    List<Restaurante> findByAtivoTrueOrderByAvaliacaoDesc();
 }
